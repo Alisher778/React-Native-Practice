@@ -1,31 +1,30 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import { 
+  Button, 
+  StyleSheet, 
+  Text, 
+  TextInput, 
+  View} from 'react-native';
 
 export default class App extends Component {
-  state = {input: 'hey', k: ''}
+  state = {input: '', k: ''}
 
   inputHandler = val => {
     this.setState({input: val});
   }
 
   value = (e) => {
-    alert(e.target.value)
+    this.setState({k: e.value})
+    alert(e)
   }
   render() {
     return(
       <View style={styles.font}>
         <Text>{this.state.input}</Text>
-        <Text style={styles.fontText}>
-          Hello Man
-        </Text>
-        <TextInput value="" onChange={this.value} style={styles.input} />
-        <TextInput 
-			style={styles.input} 
-			value={this.state.input} 
-			onChangeText={this.inputHandler}
-			spellCheck={true}
-			autoCapitalize="sentences"
-		/>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '80%'}}>
+          <TextInput value={this.state.input} onChangeText={this.inputHandler} style={styles.input}/>
+          <Button title="Clikc Me Bitch" color="red" style={styles.button}/>
+        </View>
       </View>
     );
   }
@@ -46,6 +45,16 @@ const styles = StyleSheet.create({
   input: {
     borderColor: '#000',
     borderStyle: 'solid',
-    borderWidth: 1
+    borderWidth: 1,
+    width: '70%'
+  },
+  button: {
+    borderStyle: 'solid',
+    borderColor: 'red',
+    borderWidth: 2,
+    backgroundColor: 'red',
+    width: '30%',
+    borderRadius: 8,
+    alignItems: 'center',
   }
 }) 
