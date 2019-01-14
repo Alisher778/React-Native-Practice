@@ -7,15 +7,14 @@ import {
   View} from 'react-native';
 
 export default class App extends Component {
-  state = {input: '', k: ''}
+  state = {input: '', city: []}
 
   inputHandler = val => {
     this.setState({input: val});
   }
 
-  value = (e) => {
-    this.setState({k: e.value})
-    alert(e)
+  buttonHandler = () => {
+
   }
   render() {
     return(
@@ -23,7 +22,15 @@ export default class App extends Component {
         <Text>{this.state.input}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '80%'}}>
           <TextInput value={this.state.input} onChangeText={this.inputHandler} style={styles.input}/>
-          <Button title="Clikc Me Bitch" color="red" style={styles.button}/>
+          <Button 
+            title="Clikc Me Bitch" 
+            color="red" 
+            style={styles.button}
+            onPress={this.buttonHandler}
+          />
+        </View>
+        <View>
+          {this.state.city.forEach((item) => <Text>{item}</Text>)}
         </View>
       </View>
     );
