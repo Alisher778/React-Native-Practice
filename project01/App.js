@@ -7,30 +7,40 @@ import {
   View} from 'react-native';
 
 export default class App extends Component {
-  state = {input: '', city: []}
+  state = {input: '', city: ['Alo'], error: false};
 
   inputHandler = val => {
     this.setState({input: val});
   }
 
   buttonHandler = () => {
-
+    if(this.state.input) {
+      this.setState({city: [...this.state.city, this.state.input], input: ''});
+    } else {
+      this.setState({error: true});
+    }
   }
+
   render() {
     return(
       <View style={styles.font}>
         <Text>{this.state.input}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '80%'}}>
-          <TextInput value={this.state.input} onChangeText={this.inputHandler} style={styles.input}/>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '90%', alignItems: 'center'}}>
+          <TextInput
+            id="cityInput" 
+            value={this.state.input} 
+            onChangeText={this.inputHandler} 
+            style={this.state.error?styles.error : styles.input}
+          />
           <Button 
             title="Clikc Me Bitch" 
-            color="red" 
+            color="navy" 
             style={styles.button}
             onPress={this.buttonHandler}
           />
         </View>
-        <View>
-          {this.state.city.forEach((item) => <Text>{item}</Text>)}
+        <View style={{flexDirection: "column"}}>
+          {this.state.city.map((city, i) => <Text key={i} style={styles.list}>{city}</Text>)}
         </View>
       </View>
     );
@@ -53,7 +63,8 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderStyle: 'solid',
     borderWidth: 1,
-    width: '70%'
+    width: '70%',
+    height: 35
   },
   button: {
     borderStyle: 'solid',
@@ -63,5 +74,20 @@ const styles = StyleSheet.create({
     width: '30%',
     borderRadius: 8,
     alignItems: 'center',
+    padding: 10
+  }, error: {
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: 'red',
+    width: '70%',
+    height: 35
+  }, list: {
+    lineHeight: 40,
+    fontSize: 18,
+    borderColor: "#000",
+    borderStyle: "solid",
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    padding: 10
   }
 }) 
