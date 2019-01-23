@@ -8,6 +8,7 @@ import {
   TextInput, 
   View} from 'react-native';
   import City from './src/components/Weather/Weather';
+  import Users from './src/components/Users/Users';
 
 export default class App extends Component {
   state = {input: '', city: ['Alo'], error: false};
@@ -27,6 +28,7 @@ export default class App extends Component {
   render() {
     return(
       <View style={styles.font}>
+        <Users />
         <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '90%', alignItems: 'center'}}>
           <TextInput
             id="cityInput" 
@@ -46,12 +48,6 @@ export default class App extends Component {
             {this.state.city.map((city, i) => <City key={i} id={i+1} name={city} />)}
           </View>
         </ScrollView>
-        <Button 
-          onPress={() => alert('Hello Man!')}
-          color="#045ca0"
-          title="Click Me Please"
-          style={{height: 40, borderColor: "#045ca0", borderWidth: 1, borderStyle: "solid"}}
-        />
       </View>
     );
   }
@@ -64,7 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 200,
     textAlign: 'center',
     padding: 20,
-    alignItems: 'flex-start';
+    alignItems: 'flex-start',
     justifyContent: 'flex-start'
   }, fontText: {
     fontSize: 50,
