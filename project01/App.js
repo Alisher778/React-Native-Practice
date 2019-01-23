@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { 
   Button,
   Image, 
-  StyleSheet, 
+  StyleSheet,
+  ScrollView,
   Text, 
   TextInput, 
   View} from 'react-native';
@@ -17,7 +18,7 @@ export default class App extends Component {
 
   buttonHandler = () => {
     if(this.state.input) {
-      this.setState({city: [...this.state.city, this.state.input], input: ''});
+      this.setState({city: [...this.state.city, this.state.input], input: '', error: false});
     } else {
       this.setState({error: true});
     }
@@ -40,9 +41,11 @@ export default class App extends Component {
             onPress={this.buttonHandler}
           />
         </View>
-        <View style={{flexDirection: "column"}}>
-          {this.state.city.map((city, i) => <City key={i} id={i+1} name={city} />)}
-        </View>
+        <ScrollView maximumZoomScale="4">
+          <View style={{flexDirection: "column"}}>
+            {this.state.city.map((city, i) => <City key={i} id={i+1} name={city} />)}
+          </View>
+        </ScrollView>
         <Button 
           onPress={() => alert('Hello Man!')}
           color="#045ca0"
@@ -60,7 +63,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 200,
     textAlign: 'center',
-    padding: 20
+    padding: 20,
+    alignItems: 'flex-start';
+    justifyContent: 'flex-start'
   }, fontText: {
     fontSize: 50,
     alignContent: 'center',
