@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   font: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 200,
     textAlign: 'center',
     padding: 20,
     alignItems: 'flex-start',
