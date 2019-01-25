@@ -28,7 +28,6 @@ export default class App extends Component {
   render() {
     return(
       <View style={styles.font}>
-        <Users />
         <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '90%', alignItems: 'center'}}>
           <TextInput
             id="cityInput" 
@@ -48,6 +47,7 @@ export default class App extends Component {
             {this.state.city.map((city, i) => <City key={i} id={i+1} name={city} />)}
           </View>
         </ScrollView>
+        <Button title='Say Hi' color="yellow" onPress={() => alert('Salom '+this.state.input)} />
       </View>
     );
   }
