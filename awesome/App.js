@@ -1,30 +1,28 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import axios from 'axios';
+import List from './src/components/List/List';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component{
+  state = {users: [{name: 'Alisher', email: 'ali@gmail.com'}], msg: '', status: null}
 
-type Props = {};
-export default class App extends Component<Props> {
+  componentDidMount = () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(data => data.json())
+      .then(res => this.setState(data => {
+        return {users: data.users.concat(res)}
+      }))
+      .catch(err => this.setState({msg: err, status: false}));
+  }
+
   render() {
+    const usersList = this.state.users.map((user, i) => {
+      return <List key={i} name={user.name} email={user.email} />
+    })
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.welcome}>{this.state.msg}</Text>
+        <View style={{width: "100%", padding: 5,}}>{usersList}</View>
       </View>
     );
   }
@@ -42,9 +40,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  column: {
+    flexDirection: 'column',
+  }
 });
