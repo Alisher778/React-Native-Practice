@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const list = (props) => {
     return(
-        <View style={styles.list}>
-            <Text style={styles.margin}>Name: {props.name}</Text>
-            <Text style={styles.margin}>Email: {props.email}</Text>
-        </View>
+        <TouchableHighlight onPress={() => alert('Hey '+props.name)} >
+            <View style={styles.list}>
+                <Text style={styles.margin}>{props.name}</Text>
+            </View>
+        </TouchableHighlight>
     );
 }
 
@@ -18,7 +19,9 @@ const styles = StyleSheet.create({
     }, margin: {
         width: '100%',
         backgroundColor: '#eee',
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center',
+        padding: 6
     }
 });
 

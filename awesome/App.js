@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import axios from 'axios';
 import List from './src/components/List/List';
 
@@ -17,7 +17,9 @@ export default class App extends Component{
 
   render() {
     const usersList = this.state.users.map((user, i) => {
-      return <List key={i} name={user.name} email={user.email} />
+      return (
+          <List key={i} name={user.name} email={user.email} />
+      );
     })
     return (
       <View style={styles.container}>
