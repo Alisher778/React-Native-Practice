@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import UserList from './UserList/UserList';
 
 export default class AddUser extends Component {
@@ -49,13 +49,14 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         marginTop: 30,
-        marginBottom: 30,
-        paddingLeft: 10
+        marginBottom: 50,
+        padding: 5,
     },
     border: {
         borderWidth: 1,
         borderStyle: 'solid',
-        height: 30,
-        width: '100%'
-    } 
+        height: 40,
+        width: '100%',
+        padding: 10
+    }
 })
