@@ -3,9 +3,9 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const list = (props) => {
     return(
-        <TouchableHighlight onPress={() => alert('Hey '+props.name)} >
+        <TouchableHighlight onPress={() => alert('Hey '+props.raqam)} >
             <View style={styles.list}>
-                <Text style={styles.margin}>{props.name}</Text>
+                <Text style={styles.margin}>{props.name} {props.raqam}</Text>
             </View>
         </TouchableHighlight>
     );

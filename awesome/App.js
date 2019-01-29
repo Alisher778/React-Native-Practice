@@ -18,7 +18,7 @@ export default class App extends Component{
   render() {
     const usersList = this.state.users.map((user, i) => {
       return (
-          <List key={i} name={user.name} email={user.email} />
+        <List key={i} raqam={1} name={user.name} email={user.email} />
       );
     })
     return (
