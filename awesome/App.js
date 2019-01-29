@@ -10,15 +10,18 @@ export default class App extends Component{
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(data => data.json())
       .then(res => this.setState(data => {
-        return {users: data.users.concat(res)}
+        return {users: res}
       }))
       .catch(err => this.setState({msg: err, status: false}));
   }
 
+  removeListHandler = (id) => {
+    return this.setState({users: this.state.users.filter(user => user.id !== id)})
+  }
   render() {
     const usersList = this.state.users.map((user, i) => {
       return (
-        <List key={i} raqam={1} name={user.name} email={user.email} />
+        <List key={i} id={user.id} name={user.name} email={user.email} remove={this.removeListHandler} />
       );
     })
     return (
