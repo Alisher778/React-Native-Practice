@@ -1,7 +1,9 @@
 import usersReducer from './reducers/usersReducer';
 
 const reducer = () => {
-    users: usersReducer
+   return {
+       users: usersReducer
+    }
 }
 
 export default reducer;

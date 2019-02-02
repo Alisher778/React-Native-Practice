@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
+import {Middleware, createStore} from 'redux';
+import {Provider, connect} from 'react-redux';
 import { FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
 import List from './src/components/List/List';
 import AddUser from './src/components/AddUser/AddUser';
 import UserModal from './src/components/UserModal/UserModal';
+import reducers from './src/store/store';
+
+const stores = createStore(reducers)
 
 export default class App extends Component{
-  state = {users: [{name: 'Alisher', email: 'ali@gmail.com'}], msg: '', status: null}
+  constructor(props) {
+    super(props);
+    state = {users: [{name: 'Alisher', email: 'ali@gmail.com'}], msg: '', status: null}
+  }
 
   componentDidMount = () => {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -27,14 +35,22 @@ export default class App extends Component{
       );
     })
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>{this.state.msg}</Text>
-        <AddUser />
-        <UserModal />
-        {/* <View style={{width: "100%", padding: 5,}}>{usersList}</View> */}
-        <ScrollView style={{width: '100%'}}>{usersList}</ScrollView>
-      </View>
+      <Provider store={stores}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>{this.props.users.users[0].name}</Text>
+          <AddUser />
+          <UserModal />
+          {/* <View style={{width: "100%", padding: 5,}}>{usersList}</View> */}
+          <ScrollView style={{width: '100%'}}>{usersList}</ScrollView>
+        </View>
+      </Provider>
     );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
   }
 }
 
@@ -54,3 +70,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   }
 });
+
+export default connect(mapStateToProps)(App);
