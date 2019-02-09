@@ -1,20 +1,5 @@
 <?php
 
-    $API_KEY = NULL;
-
-    // Complain if credentials haven't been filled out.
-    assert($API_KEY, "Please supply your API key.");
-
-    // API constants, you shouldn't have to change these.
-    $API_HOST = "https://api.yelp.com";
-    $SEARCH_PATH = "/v3/businesses/search";
-    $BUSINESS_PATH = "/v3/businesses/";  // Business ID will come after slash.
-
-    // Defaults for our simple example.
-    $DEFAULT_TERM = "dinner";
-    $DEFAULT_LOCATION = "San Francisco, CA";
-    $SEARCH_LIMIT = 3;
-
     function request($host, $path, $url_params = array()) {
         // Send Yelp API Call
         try {

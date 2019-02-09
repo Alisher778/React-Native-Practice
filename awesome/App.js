@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Middleware, createStore} from 'redux';
 import {Provider, connect} from 'react-redux';
 import { FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
-import axios from 'axios';
 import List from './src/components/List/List';
 import AddUser from './src/components/AddUser/AddUser';
 import UserModal from './src/components/UserModal/UserModal';
