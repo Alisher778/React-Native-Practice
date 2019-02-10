@@ -9,7 +9,7 @@ import reducers from './src/store/store';
 
 const stores = createStore(reducers)
 
-export default class App extends Component{
+class App extends Component{
   constructor(props) {
     super(props);
     state = {users: [{name: 'Alisher', email: 'ali@gmail.com'}], msg: '', status: null}
@@ -36,7 +36,7 @@ export default class App extends Component{
     return (
       <Provider store={stores}>
         <View style={styles.container}>
-          <Text style={styles.welcome}>{this.props.users.users[0].name}</Text>
+          <Text style={styles.welcome}>{this.state.users[0].name}</Text>
           <AddUser />
           <UserModal />
           {/* <View style={{width: "100%", padding: 5,}}>{usersList}</View> */}
@@ -47,11 +47,11 @@ export default class App extends Component{
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.users
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     users: state.users
+//   }
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps)(App);
+export default App;
