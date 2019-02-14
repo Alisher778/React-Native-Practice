@@ -5,7 +5,7 @@ import UserList from './UserList/UserList';
 export default class AddUser extends Component {
     state= {user: [{key: '1', value: 'User 1'}]}
 
-    userHandler = () => {
+    userHandler = (name) => {
         this.setState(prevState => {
             return {
                 user: prevState.user.concat({key: Math.random().toString(), value: this.state.input})
