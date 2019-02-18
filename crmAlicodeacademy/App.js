@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import { connect } from 'react-redux'; 
+import {addUser, deleteUser} from './src/store/actions/userActions';
 
-export default class App extends Component {
-  state = {name: 'Hello', users: []};
-  addUserHandler = (val) => {
-    return this.setState({users: [...this.state.users, {name: val, id: Date.now()}]})
-  }
+class App extends Component {
+	state = {name: ''}
+  addUserHandler = (name) => {
+		return this.props.onAddUser(name)
+	}
 
-  removeUserHandler = (key) => {
-	this.setState(prevState => {
-		return {users: prevState.users.filter(user => user.id !== key)}
-	})
+  removeUserHandler = (id) => {
+		return this.props.onDeleteUser(id)
   }
   render() {
     return (
@@ -28,7 +28,7 @@ export default class App extends Component {
 				style={styles.btn}
 			/>
 		</View>
-		{this.state.users.map((user, i) => {
+		{this.props.users.map((user, i) => {
 			return (
 				<TouchableHighlight key={user.id} onPress={() => this.removeUserHandler(user.id)}>
 					<Text>{user.name}</Text>
@@ -59,3 +59,18 @@ const styles = StyleSheet.create({
 	  padding: 5
   }
 });
+
+const mapStateToProps = (state) => {
+	return {
+		users: state.users.users
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onAddUser: (name) => dispatch(addUser(name)),
+		onDeleteUser: (id) => dispatch(deleteUser(id))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
